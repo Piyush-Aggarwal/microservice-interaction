@@ -13,9 +13,10 @@ subprojects {
     version = '0.0.1-SNAPSHOT'
 
     java {
-        toolchain {
-            languageVersion = JavaLanguageVersion.of(21)
-        }
+        // Compatible with JDK 21 and above (including JDK 23)
+        // Uses whatever JDK is currently installed
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 
     repositories {
@@ -39,5 +40,9 @@ subprojects {
 
     tasks.named('test') {
         useJUnitPlatform()
+    }
+
+    tasks.named('compileJava') {
+        options.release = 21
     }
 }
