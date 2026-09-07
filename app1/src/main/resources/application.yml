@@ -12,6 +12,20 @@ server:
 spring:
   application:
     name: app1
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/app1}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      # `update` keeps the demo runnable without a migration tool; switch to `validate`
+      # (or none) once a real schema-migration story exists.
+      ddl-auto: ${DB_DDL_AUTO:update}
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: false
 
 eureka:
   client:
